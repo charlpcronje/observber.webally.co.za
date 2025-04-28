@@ -6,23 +6,24 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
 
-// Make THREE available globally for our other modules
+// Make THREE available globally for backward compatibility
 window.THREE = THREE;
-window.OrbitControls = OrbitControls;
-window.EffectComposer = EffectComposer;
-window.RenderPass = RenderPass;
-window.UnrealBloomPass = UnrealBloomPass;
-window.ShaderPass = ShaderPass;
 
-// Import our custom modules
-import './logger.js';
-import './dataManager.js';
-import './shapeFactory.js';
-import './singularitySystem.js';
-import './uiManager.js';
-import './eventManager.js';
+// Import our modules after adding THREE to window
+import logger from './logger.js';
+import DataManager from './dataManager.js';
+import ShapeFactory from './shapeFactory.js';
+import SingularitySystem from './singularitySystem.js';
+import UIManager from './uiManager.js';
+import EventManager from './eventManager.js';
 
+/**
+ * Main application class
+ */
 class App {
+    /**
+     * Creates a new App instance
+     */
     constructor() {
         this.container = document.getElementById('canvas-container');
         
@@ -30,6 +31,9 @@ class App {
         this.initializeComponents();
     }
     
+    /**
+     * Initializes all system components
+     */
     async initializeComponents() {
         try {
             // Create data manager
@@ -58,6 +62,10 @@ class App {
         }
     }
     
+    /**
+     * Shows an error message to the user
+     * @param {string} message - Error message to display
+     */
     showErrorMessage(message) {
         const errorElement = document.createElement('div');
         errorElement.style.cssText = `
