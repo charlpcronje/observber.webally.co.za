@@ -1,0 +1,106 @@
+[
+    {
+        "id": "event1",
+        "title": "Fall from 4 Stories onto Cement",
+        "age": 16,
+        "year": null,
+        "type": [
+            "Trauma"
+        ],
+        "probability": 0.000001,
+        "description": "Fell from 4 stories (12-15 meters) directly onto cement, landing flat on back. No fractures, no internal injuries. Walked away unharmed without hospitalization."
+    },
+    {
+        "id": "event2",
+        "title": "BMW X5 Crash at 160km/h",
+        "age": 30,
+        "year": null,
+        "type": [
+            "Trauma",
+            "Impact"
+        ],
+        "probability": 0.000000001,
+        "description": "Driving at 160+ km/h, lost control, rolled forward multiple times. No seatbelt. Went through front and side windows. Back broken in 7 places, walked away from crash. Full recovery after 5 weeks wearing a Velcro back brace."
+    },
+    {
+        "id": "event3",
+        "title": "Terminal Liver Failure Recovery",
+        "age": 30,
+        "year": null,
+        "type": [
+            "Biochemical"
+        ],
+        "probability": 0.000001,
+        "description": "Diagnosed with liver enzyme counts around 2,000, indicating total liver shutdown. Prognosis: 2 weeks to live. Self-medicated with heavy doses of OTC liver supplements (approx. 40 pills/day). Fully recovered in 2 weeks without hospitalization."
+    },
+    {
+        "id": "event4",
+        "title": "Spider Bite Infection Averted",
+        "age": 13,
+        "year": null,
+        "type": [
+            "Micro-causal",
+            "Biochemical"
+        ],
+        "probability": 0.00000001,
+        "description": "Bitten by spider; infection forming. Randomly caught broken phone aerial that punctured the exact spot, ejecting infection. Friend with similar bite hospitalized with severe infection. Survival through improbable physical intervention."
+    },
+    {
+        "id": "event5",
+        "title": "Motorbike at 200km/h — Gate Opens",
+        "age": 17,
+        "year": null,
+        "type": [
+            "Impact",
+            "Luck"
+        ],
+        "probability": 0.000000001,
+        "description": "Reached 200 km/h on a 350cc 2-stroke motorbike. Approaching closed steel gate with no time to brake. Gate randomly opened within ~200 milliseconds, allowing safe passage through the open gap instead of fatal collision."
+    },
+    {
+        "id": "event6",
+        "title": "Footpeg Embedded in Knee",
+        "age": "Teens",
+        "year": null,
+        "type": [
+            "Trauma",
+            "Biochemical"
+        ],
+        "probability": 0.001,
+        "description": "Motorbike footpeg broke off and embedded into knee. Delayed treatment by one day. Manually extracted peg at hospital under minimal sedation. Avoided major infection or mobility loss."
+    },
+    {
+        "id": "event7",
+        "title": "Motorbike Scrambler Crashes (~100 times)",
+        "age": "Teens",
+        "year": null,
+        "type": [
+            "Trauma",
+            "Impact"
+        ],
+        "probability": 0.01,
+        "description": "Approximately 100 crashes while racing motorbikes off-road without proper gear. Sustained minor injuries (broken fingers, toes) but always recovered fully. No long-term consequences."
+    },
+    {
+        "id": "event8",
+        "title": "Holding Breath 6+ Minutes Despite Smoking",
+        "age": "40s",
+        "year": null,
+        "type": [
+            "Biochemical"
+        ],
+        "probability": 0.001,
+        "description": "Able to hold breath over 6 minutes despite 30 years of smoking history. Matches elite freediver lung capacity without training. Normal lung damage from smoking absent."
+    },
+    {
+        "id": "event9",
+        "title": "4th Story Fall on Back at Drive-in",
+        "age": "Teens",
+        "year": null,
+        "type": [
+            "Trauma"
+        ],
+        "probability": 0.0001,
+        "description": "Fell from the 4th story height onto solid cement while messing around. Landed on back. No fractures, no hospitalization, no long-term damage."
+    }
+]

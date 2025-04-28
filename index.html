@@ -1,0 +1,129 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charl's Survival Singularity</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div id="canvas-container"></div>
+    <div id="ui-overlay">
+        <div id="title">Charl's Survival Singularity</div>
+        <div id="tooltip" class="hidden"></div>
+        <div id="detail-panel" class="hidden">
+            <div class="panel-header">
+                <h2 id="event-title"></h2>
+                <button id="close-panel">×</button>
+            </div>
+            <div class="panel-content">
+                <div class="event-detail">
+                    <span class="label">Age:</span>
+                    <span id="event-age"></span>
+                </div>
+                <div class="event-detail">
+                    <span class="label">Year:</span>
+                    <span id="event-year"></span>
+                </div>
+                <div class="event-detail">
+                    <span class="label">Type:</span>
+                    <span id="event-type"></span>
+                </div>
+                <div class="event-detail">
+                    <span class="label">Probability:</span>
+                    <span id="event-probability"></span>
+                </div>
+                <div class="event-detail">
+                    <span class="label">Description:</span>
+                    <div id="event-description"></div>
+                </div>
+            </div>
+        </div>
+        <div id="controls">
+            <button id="export-btn">Export Data</button>
+            <button id="import-btn">Import Data</button>
+            <button id="add-event-btn">Add Event</button>
+        </div>
+    </div>
+    
+    <!-- Add Event Form (initially hidden) -->
+    <div id="add-event-form" class="hidden">
+        <div class="panel-header">
+            <h2>Add New Survival Event</h2>
+            <button id="close-form">×</button>
+        </div>
+        <div class="form-content">
+            <div class="form-group">
+                <label for="input-title">Title:</label>
+                <input type="text" id="input-title" required>
+            </div>
+            <div class="form-group">
+                <label for="input-age">Age:</label>
+                <input type="text" id="input-age" required>
+            </div>
+            <div class="form-group">
+                <label for="input-year">Year (optional):</label>
+                <input type="text" id="input-year">
+            </div>
+            <div class="form-group">
+                <label>Type:</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" value="Trauma"> Trauma</label>
+                    <label><input type="checkbox" value="Impact"> Impact</label>
+                    <label><input type="checkbox" value="Biochemical"> Biochemical</label>
+                    <label><input type="checkbox" value="Luck"> Luck</label>
+                    <label><input type="checkbox" value="Micro-causal"> Micro-causal</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="input-probability">Probability (1 in X):</label>
+                <input type="number" id="input-probability" required>
+            </div>
+            <div class="form-group">
+                <label for="input-description">Description:</label>
+                <textarea id="input-description" rows="4" required></textarea>
+            </div>
+            <button id="save-event-btn">Save Event</button>
+        </div>
+    </div>
+    
+    <!-- Import File Dialog (initially hidden) -->
+    <div id="import-dialog" class="hidden">
+        <div class="panel-header">
+            <h2>Import Events</h2>
+            <button id="close-import">×</button>
+        </div>
+        <div class="form-content">
+            <div class="form-group">
+                <label for="import-file">Select JSON File:</label>
+                <input type="file" id="import-file" accept=".json">
+            </div>
+            <div class="import-options">
+                <label>
+                    <input type="radio" name="import-mode" value="replace" checked> Replace all events
+                </label>
+                <label>
+                    <input type="radio" name="import-mode" value="append"> Append to existing events
+                </label>
+            </div>
+            <button id="confirm-import-btn">Import</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r150/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r150/addons/controls/OrbitControls.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r150/addons/postprocessing/EffectComposer.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r150/addons/postprocessing/RenderPass.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r150/addons/postprocessing/UnrealBloomPass.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r150/addons/postprocessing/ShaderPass.js"></script>
+    <script src="js/logger.js"></script>
+    <script src="js/dataManager.js"></script>
+    <script src="js/shapeFactory.js"></script>
+    <script src="js/singularitySystem.js"></script>
+    <script src="js/uiManager.js"></script>
+    <script src="js/eventManager.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

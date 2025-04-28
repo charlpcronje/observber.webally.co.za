@@ -1,0 +1,257 @@
+/* css/styles.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #000;
+    color: #fff;
+    overflow: hidden;
+}
+
+#canvas-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+#ui-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+#title {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 24px;
+    color: rgba(0, 255, 255, 0.8);
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+    font-weight: bold;
+}
+
+#tooltip {
+    position: absolute;
+    padding: 8px 12px;
+    background-color: rgba(10, 10, 20, 0.8);
+    border: 1px solid rgba(0, 255, 255, 0.5);
+    border-radius: 4px;
+    color: #fff;
+    font-size: 14px;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+}
+
+#tooltip.hidden {
+    opacity: 0;
+}
+
+#detail-panel {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    width: 380px;
+    background-color: rgba(10, 10, 20, 0.85);
+    border: 1px solid rgba(0, 255, 255, 0.5);
+    border-radius: 8px;
+    pointer-events: auto;
+    transition: opacity 0.3s, transform 0.3s;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+}
+
+#detail-panel.hidden {
+    opacity: 0;
+    transform: translateY(-50%) translateX(400px);
+    pointer-events: none;
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+    background-color: rgba(0, 50, 80, 0.6);
+}
+
+.panel-header h2 {
+    margin: 0;
+    font-size: 18px;
+    color: rgba(0, 255, 255, 0.9);
+}
+
+.panel-content {
+    padding: 20px;
+}
+
+.event-detail {
+    margin-bottom: 15px;
+}
+
+.label {
+    display: inline-block;
+    width: 100px;
+    font-weight: bold;
+    color: rgba(255, 100, 255, 0.9);
+}
+
+#event-description {
+    margin-top: 8px;
+    line-height: 1.5;
+}
+
+#controls {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    pointer-events: auto;
+}
+
+button {
+    background-color: rgba(0, 80, 120, 0.6);
+    color: rgba(0, 255, 255, 0.9);
+    border: 1px solid rgba(0, 255, 255, 0.5);
+    border-radius: 4px;
+    padding: 8px 16px;
+    margin-right: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+    outline: none;
+}
+
+button:hover {
+    background-color: rgba(0, 100, 150, 0.8);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+}
+
+#close-panel, #close-form {
+    background: none;
+    border: none;
+    color: rgba(0, 255, 255, 0.7);
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0 5px;
+}
+
+#close-panel:hover, #close-form:hover {
+    color: rgba(0, 255, 255, 1);
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.8);
+}
+
+#add-event-form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    background-color: rgba(10, 10, 20, 0.9);
+    border: 1px solid rgba(0, 255, 255, 0.5);
+    border-radius: 8px;
+    pointer-events: auto;
+    transition: opacity 0.3s;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+    z-index: 10;
+}
+
+#add-event-form.hidden, #import-dialog.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.form-content {
+    padding: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: rgba(0, 255, 255, 0.9);
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 8px 12px;
+    background-color: rgba(30, 30, 50, 0.6);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    border-radius: 4px;
+    color: #fff;
+    font-size: 14px;
+}
+
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.checkbox-group label {
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.checkbox-group input {
+    width: auto;
+    margin-right: 5px;
+}
+
+#save-event-btn, #confirm-import-btn {
+    margin-top: 10px;
+    width: 100%;
+    padding: 10px;
+    background-color: rgba(0, 100, 150, 0.7);
+}
+
+/* Import dialog specific styles */
+#import-dialog {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background-color: rgba(10, 10, 20, 0.9);
+    border: 1px solid rgba(0, 255, 255, 0.5);
+    border-radius: 8px;
+    pointer-events: auto;
+    transition: opacity 0.3s;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+    z-index: 10;
+}
+
+.import-options {
+    margin: 15px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.import-options label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.import-options input {
+    margin-right: 10px;
+}

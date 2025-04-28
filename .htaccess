@@ -1,0 +1,33 @@
+# .htaccess - Ensure proper MIME types for all files
+<IfModule mod_mime.c>
+  # Set JSON MIME type
+  AddType application/json .json
+  
+  # Set correct MIME types for CSS and JavaScript
+  AddType text/css .css
+  AddType application/javascript .js
+  
+  # Allow cross-origin requests for local development
+  <IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, OPTIONS"
+    Header set Access-Control-Allow-Headers "Origin, X-Requested-With, Content-Type, Accept"
+  </IfModule>
+</IfModule>
+
+# Enable file caching but ensure JSON files are always fresh
+<IfModule mod_expires.c>
+  ExpiresActive On
+  
+  # Set default cache time to 1 week
+  ExpiresDefault "access plus 1 week"
+  
+  # JSON files should be checked more frequently
+  ExpiresByType application/json "access plus 1 hour"
+</IfModule>
+
+# Prevent directory listing
+Options -Indexes
+
+# Redirect to index.html if directory is accessed
+DirectoryIndex index.html

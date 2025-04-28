@@ -1,0 +1,134 @@
+:root {
+    --neon-cyan: #00FFFF;
+    --neon-magenta: #FF00FF;
+    --electric-blue: #007FFF;
+    --laser-green: #00FF00;
+    --singularity-glow: #ADD8E6; /* Light blue for core */
+    --panel-bg: rgba(15, 15, 30, 0.9);
+    --panel-border: var(--electric-blue);
+    --text-color: #E0E0E0;
+    --glow-text: #FFF; /* For highlighted text */
+}
+
+body {
+    margin: 0;
+    overflow: hidden;
+    background-color: #05050a; /* Dark cosmic black */
+    color: var(--text-color);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+canvas {
+    display: block; /* Removes scrollbar issue */
+}
+
+#detail-panel {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 350px;
+    max-height: calc(100vh - 40px); /* Limit height */
+    background-color: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(0, 127, 255, 0.5);
+    color: var(--text-color);
+    z-index: 10;
+    overflow-y: auto; /* Allow scrolling if content overflows */
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+    transform: translateX(110%); /* Start off-screen */
+    opacity: 0;
+}
+
+#detail-panel.visible {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+#detail-panel h2 {
+    margin-top: 0;
+    color: var(--neon-cyan);
+    text-shadow: 0 0 5px var(--neon-cyan);
+}
+
+#detail-panel p {
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+#detail-panel strong {
+    color: var(--electric-blue);
+}
+
+#detail-panel button {
+    background-color: var(--electric-blue);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-right: 5px;
+    transition: background-color 0.2s ease;
+}
+
+#detail-panel button:hover {
+    background-color: var(--neon-cyan);
+    color: #000;
+}
+
+#close-panel-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 24px;
+    line-height: 1;
+    padding: 0;
+    cursor: pointer;
+}
+
+#close-panel-btn:hover {
+    color: var(--neon-cyan);
+}
+
+.hidden { /* Utility class, though panel uses transform/opacity now */
+    display: none;
+}
+
+/* Simple probability visualization (log scale placeholder) */
+#detail-probability-viz {
+    display: inline-block;
+    height: 10px;
+    background: linear-gradient(to right, var(--laser-green), var(--neon-magenta));
+    margin-left: 10px;
+    vertical-align: middle;
+    border-radius: 3px;
+    box-shadow: 0 0 3px var(--glow-text);
+}
+
+/* Hover Tooltip */
+#info-tooltip {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    pointer-events: none; /* Important! */
+    display: none; /* Hidden by default */
+    z-index: 100;
+    white-space: nowrap;
+}
