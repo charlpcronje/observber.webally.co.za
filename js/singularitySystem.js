@@ -78,7 +78,7 @@ class SingularitySystem {
     }
     
     setupControls() {
-        this.controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
+        this.controls = new OrbitControls(this.camera, this.renderer.domElement);
         this.controls.enableDamping = true;
         this.controls.dampingFactor = 0.1;
         this.controls.rotateSpeed = 0.7;
