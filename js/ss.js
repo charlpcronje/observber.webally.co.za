@@ -78,7 +78,7 @@ class SingularitySystem {
     }
     
     setupControls() {
-        this.controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
+        this.controls = new OrbitControls(this.camera, this.renderer.domElement);
         this.controls.enableDamping = true;
         this.controls.dampingFactor = 0.1;
         this.controls.rotateSpeed = 0.7;
@@ -164,14 +164,14 @@ class SingularitySystem {
     }
     
     setupPostprocessing() {
-        this.composer = new THREE.EffectComposer(this.renderer);
+        this.composer = new EffectComposer(this.renderer);
         
         // Add render pass
-        const renderPass = new THREE.RenderPass(this.scene, this.camera);
+        const renderPass = new RenderPass(this.scene, this.camera);
         this.composer.addPass(renderPass);
         
         // Add bloom pass for glow effects
-        const bloomPass = new THREE.UnrealBloomPass(
+        const bloomPass = new UnrealBloomPass(
             new THREE.Vector2(window.innerWidth, window.innerHeight),
             1.5,    // strength
             0.4,    // radius
@@ -672,4 +672,4 @@ class SingularitySystem {
 // Export as global for non-module scripts
 window.SingularitySystem = SingularitySystem;
 
-export default SingularitySystem;
+export default SingularitySystem;// js/singularitySystem.js

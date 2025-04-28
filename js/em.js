@@ -191,7 +191,6 @@ class EventManager {
     }
 }
 
-
 // Export as global for non-module scripts
 window.EventManager = EventManager;
 
