@@ -164,14 +164,14 @@ class SingularitySystem {
     }
     
     setupPostprocessing() {
-        this.composer = new THREE.EffectComposer(this.renderer);
+        this.composer = new EffectComposer(this.renderer);
         
         // Add render pass
-        const renderPass = new THREE.RenderPass(this.scene, this.camera);
+        const renderPass = new RenderPass(this.scene, this.camera);
         this.composer.addPass(renderPass);
         
         // Add bloom pass for glow effects
-        const bloomPass = new THREE.UnrealBloomPass(
+        const bloomPass = new UnrealBloomPass(
             new THREE.Vector2(window.innerWidth, window.innerHeight),
             1.5,    // strength
             0.4,    // radius
