@@ -11,122 +11,219 @@
             "Survival"
         ],
         "probability": 0.0002,
-        "description": "Born during a critical oxygen deprivation window estimated at 5–6 minutes without full oxygenation. Despite extreme risk of death or lifelong brain damage, survived birth with full neurological integrity. Outcome defied normal survival and damage probability curves."
+        "probability_words": "About 1 in 5,000 — survival odds of complete birth hypoxia without brain damage."
     },
     {
-        "id": "event1",
-        "title": "Fall from 4 Stories onto Cement",
-        "age": 16,
-        "year": 1999,
-        "month": 12,
-        "type": [
-            "Trauma"
-        ],
-        "probability": 0.000001,
-        "description": "Fell from 4 stories (12-15 meters) directly onto cement, landing flat on back. No fractures, no internal injuries. Walked away unharmed without hospitalization."
-    },
-    {
-        "id": "event2",
-        "title": "BMW X5 Crash at 160km/h",
-        "age": 30,
-        "year": 2011,
-        "month": 12,
+        "id": "event_childhood_carjack",
+        "title": "Knee Replaced the Car Jack Under a Nissan Skyline",
+        "age": 7,
+        "year": 1989,
+        "month": null,
         "type": [
             "Trauma",
-            "Impact"
-        ],
-        "probability": 0.000000001,
-        "description": "Driving at 160+ km/h, lost control, rolled forward multiple times. No seatbelt. Went through front and side windows. Back broken in 7 places, walked away from crash. Full recovery after 5 weeks wearing a Velcro back brace."
-    },
-    {
-        "id": "event3",
-        "title": "Terminal Liver Failure Recovery",
-        "age": 30,
-        "year": 2012,
-        "month": 12,
-        "type": [
-            "Biochemical"
-        ],
-        "probability": 0.000001,
-        "description": "Diagnosed with liver enzyme counts around 2,000, indicating total liver shutdown. Prognosis: 2 weeks to live. Self-medicated with heavy doses of OTC liver supplements (approx. 40 pills/day). Fully recovered in 2 weeks without hospitalization."
-    },
-    {
-        "id": "event4",
-        "title": "Spider Bite Infection Averted",
-        "age": 13,
-        "year": 1998,
-        "type": [
-            "Micro-causal",
-            "Biochemical"
-        ],
-        "probability": "0.00000001",
-        "probability_words": "one in one hundred million",
-        "description": "Bitten by spider; infection forming. Randomly caught broken phone aerial that punctured the exact spot, ejecting infection. Friend with similar bite hospitalized with severe infection. Survival through improbable physical intervention."
-    },
-    {
-        "id": "event5",
-        "title": "Motorbike at 200km/h — Gate Opens",
-        "age": 17,
-        "year": 2000,
-        "month": 12,
-        "type": [
             "Impact",
-            "Luck"
+            "Mechanical",
+            "Singularity-NearMiss"
         ],
-        "probability": 0.000000001,
-        "description": "Reached 200 km/h on a 350cc 2-stroke motorbike. Approaching closed steel gate with no time to brake. Gate randomly opened within ~200 milliseconds, allowing safe passage through the open gap instead of fatal collision."
+        "probability": 0.0000005,
+        "probability_words": "About 1 in 2 million — akin to being struck by lightning while winning a scratch-off."
     },
     {
-        "id": "event6",
-        "title": "Footpeg Embedded in Knee",
-        "age": "Teens",
-        "year": 1998,
-        "month": 12,
+        "id": "event_finger_reattachment",
+        "title": "Finger Severed and Successfully Reattached Without Damage",
+        "age": 5,
+        "year": 1987,
+        "month": null,
         "type": [
             "Trauma",
-            "Biochemical"
+            "Biochemical",
+            "Surgical",
+            "Recovery"
         ],
-        "probability": 0.0000001,
-        "probability_words": "one in 10 million",
-
-        "description": "Motorbike footpeg broke off and embedded into knee. Delayed treatment by one day. Manually extracted peg at hospital under minimal sedation. Avoided major infection or mobility loss."
+        "probability": 0.0005,
+        "probability_words": "About 1 in 2,000 — rarer than surviving a shark attack unharmed."
     },
     {
-        "id": "event7",
-        "title": "Motorbike Scrambler Crashes (~100 times)",
-        "age": "Teens",
-        "year": 1997,
-        "month": 12,
+        "id": "event_bmx_frontflip",
+        "title": "Accidental BMX Front Flip and Perfect Landing",
+        "age": 7,
+        "year": 1989,
+        "month": null,
         "type": [
             "Trauma",
-            "Impact"
+            "Impact",
+            "Luck",
+            "Stunt"
         ],
-        "probability": 0.000000001,
-        "probability_words": "one in one hundred million",
-        "description": "Approximately 100 crashes while racing motorbikes off-road without proper gear. Sustained minor injuries (broken fingers, toes) but always recovered fully. No long-term consequences."
+        "probability": 0.00005,
+        "probability_words": "About 1 in 20,000 — comparable to pitching a perfect game in baseball by accident."
     },
     {
-        "id": "event8",
-        "title": "Holding Breath 6+ Minutes Despite Smoking",
-        "age": "40s",
-        "year": 2025,
-        "month": 12,
+        "id": "event_server_room_vacuum",
+        "title": "Trapped in Vacuum-Sealing Server Room with Broken Release",
+        "age": 23,
+        "year": 2005,
+        "month": null,
         "type": [
-            "Biochemical"
-        ],
-        "probability": 0.001,
-        "description": "Able to hold breath over 6 minutes despite 30 years of smoking history. Matches elite freediver lung capacity without training. Normal lung damage from smoking absent."
-    },
-    {
-        "id": "event9",
-        "title": "6th Story running jump of 18m",
-        "age": "Teens",
-        "year": 2001,
-        "month": 12,
-        "type": [
+            "Mechanical",
+            "Asphyxiation",
+            "Survival",
+            "Luck",
             "Trauma"
+        ],
+        "probability": 0.000002,
+        "probability_words": "About 1 in 500,000 — rarer than being born with albinism."
+    },
+    {
+        "id": "event_bike_truck_collision",
+        "title": "Motorbike Collision into Stationary Truck at 90 km/h — Walked Away Conscious",
+        "age": 24,
+        "year": 2006,
+        "month": null,
+        "type": [
+            "Trauma",
+            "Impact",
+            "Cranial",
+            "Survival",
+            "Shock"
+        ],
+        "probability": 0.0000002,
+        "probability_words": "About 1 in 5 million — equivalent to flipping 22 heads in a row."
+    },
+    {
+        "id": "event_mother_daughter_relationship",
+        "title": "Dated a Mother and Daughter Simultaneously for Two Years",
+        "age": 31,
+        "year": 2013,
+        "month": null,
+        "type": [
+            "Social",
+            "Unlikely",
+            "Relationship",
+            "Singularity-Anomaly"
+        ],
+        "probability": 0.00001,
+        "probability_words": "About 1 in 100,000 — rarer than giving birth to quadruplets naturally."
+    },
+    {
+        "id": "event_divorce_party_threesome",
+        "title": "Happily-Divorced Party with Ex-Wife and Fiancée Turned Threesome",
+        "age": 32,
+        "year": 2014,
+        "month": null,
+        "type": [
+            "Social",
+            "Unlikely",
+            "Relationship",
+            "Singularity-Anomaly",
+            "Emotional-Survival"
+        ],
+        "probability": 0.000002,
+        "probability_words": "About 1 in 500,000 — comparable to winning a minor lottery jackpot."
+    },
+    {
+        "id": "event_tile_slip_survival",
+        "title": "Slipped on Wet Tile Steps and Fell Onto Edge Without Injury",
+        "age": 43,
+        "year": 2025,
+        "month": 4,
+        "type": [
+            "Trauma",
+            "Impact",
+            "Survival",
+            "Witnessed"
+        ],
+        "probability": 0.0005,
+        "probability_words": "About 1 in 2,000 — similar to surviving a major car crash without injury."
+    },
+    {
+        "id": "event_broom_impalement",
+        "title": "Impalement by Broken Aluminium Broom and Self-Healing Without Scar",
+        "age": 28,
+        "year": 2010,
+        "month": 12,
+        "type": [
+            "Trauma",
+            "Biochemical",
+            "Self-Surgery",
+            "Survival"
+        ],
+        "probability": 0.00005,
+        "probability_words": "About 1 in 20,000 — similar odds as bowling a perfect 300 score randomly."
+    },
+    {
+        "id": "event_armwrestling_unbreakable",
+        "title": "Unbreakable Armwrestling Strength Against All Opponents",
+        "age": 17,
+        "year": 1999,
+        "month": null,
+        "type": [
+            "Biomechanical",
+            "Strength",
+            "Unlikely",
+            "Singularity-Anomaly"
+        ],
+        "probability": 0.0005,
+        "probability_words": "About 1 in 2,000 — comparable to bench-pressing double your body weight untrained."
+    },
+    {
+        "id": "event_tree_fall_no_injury",
+        "title": "Fell 10–13 Meters from Tree onto Grass Without Injury",
+        "age": 6,
+        "year": 1988,
+        "month": null,
+        "type": [
+            "Trauma",
+            "Impact",
+            "Survival",
+            "Singularity-Anomaly"
+        ],
+        "probability": 0.000001,
+        "probability_words": "About 1 in 1 million — rarer than surviving a plane crash."
+    },
+    {
+        "id": "event_tablet_number_reaction",
+        "title": "Tapped 10 Randomized Numbers in Under One Second on Tablet",
+        "age": 41,
+        "year": 2023,
+        "month": null,
+        "type": [
+            "Cognitive",
+            "Motor-Skills",
+            "Speed",
+            "Singularity-Anomaly"
         ],
         "probability": 0.0001,
-        "description": "Fell from the 4th story height onto solid cement while messing around. Landed on back. No fractures, no hospitalization, no long-term damage."
+        "probability_words": "About 1 in 10,000 — similar to randomly guessing a 4-digit pin code first try."
+    },
+    {
+        "id": "event_transient_hypercalculation",
+        "title": "Transient Hypercalculation Bursts After Sleep Deprivation",
+        "age": "30s-40s",
+        "year": null,
+        "month": null,
+        "type": [
+            "Cognitive",
+            "Mathematical",
+            "Neurological",
+            "Singularity-Anomaly"
+        ],
+        "probability": 0.00001,
+        "probability_words": "About 1 in 100,000 — rarer than finding a four-leaf clover on first try."
+    },
+    {
+        "id": "event_cliff_motorbike_fall",
+        "title": "Rode Motorbike Off 25–30 Meter Cliff at Night and Survived",
+        "age": 16,
+        "year": 1998,
+        "month": null,
+        "type": [
+            "Trauma",
+            "Impact",
+            "Survival",
+            "Singularity-Anomaly"
+        ],
+        "probability": 0.0000001,
+        "probability_words": "About 1 in 10 million — comparable to hitting a hole-in-one twice in one golf round."
     }
 ]
