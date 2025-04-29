@@ -107,6 +107,41 @@ class SingularitySystem {
             speed: 0.0003,
             axis: new THREE.Vector3(0.2, 1.0, 0.3).normalize()
         };
+
+        // Add mouse interaction for total probability tooltip
+        this.centralSingularity.userData.isCentral = true;
+        this.centralSingularity.onPointerOver = () => {
+            const total = this.calculateTotalProbability();
+            const tooltip = document.getElementById('tooltip');
+            if (tooltip) {
+                tooltip.textContent = `Total probability of all events: ${total.sum.toExponential(2)} (${total.human})`;
+                tooltip.classList.remove('hidden');
+                tooltip.style.left = `${window.innerWidth / 2}px`;
+                tooltip.style.top = `${window.innerHeight / 2 - 50}px`;
+            }
+        };
+        this.centralSingularity.onPointerOut = () => {
+            const tooltip = document.getElementById('tooltip');
+            if (tooltip) tooltip.classList.add('hidden');
+        };
+    }
+    
+    calculateTotalProbability() {
+        // Sum all event probabilities, parsing as float if string
+        let sum = 0;
+        (this.events || []).forEach(ev => {
+            let p = ev.probability;
+            if (typeof p === 'string') p = parseFloat(p);
+            if (!isNaN(p)) sum += p;
+        });
+        // Human-friendly description
+        let human = '';
+        if (sum < 1e-9) human = 'less than one in a billion';
+        else if (sum < 1e-6) human = 'less than one in a million';
+        else if (sum < 1e-3) human = 'less than one in a thousand';
+        else if (sum < 1e-1) human = 'less than one in ten';
+        else human = `about ${sum}`;
+        return { sum, human };
     }
     
     addSingularityGlow() {
@@ -270,62 +305,32 @@ class SingularitySystem {
         this.camera.updateProjectionMatrix();
         
         this.renderer.setSize(width, height);
-        this.composer.setSize(width, height);
-    }
-    
-    onMouseMove(event) {
-        // Calculate mouse position in normalized device coordinates
-        const rect = this.renderer.domElement.getBoundingClientRect();
-        this.mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-        this.mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
-        
-        // Update raycaster
-        this.raycaster.setFromCamera(this.mouse, this.camera);
-        
-        // Find intersections with event objects only (not the central singularity or background)
-        const intersects = this.raycaster.intersectObjects(this.eventObjects, true);
-        
-        // Handle hover states
-        if (intersects.length > 0) {
-            // Find the top-level event object that was intersected
-            let topLevelObject = intersects[0].object;
-            while (topLevelObject.parent && !topLevelObject.userData.event &&
-                   topLevelObject.parent !== this.scene) {
-                topLevelObject = topLevelObject.parent;
-            }
-            
-            if (topLevelObject.userData.event) {
-                // New hover target
-                if (this.intersectedObject !== topLevelObject) {
-                    // Clear previous hover
-                    if (this.intersectedObject) {
-                        this.onHoverExit(this.intersectedObject);
-                    }
-                    
-                    this.intersectedObject = topLevelObject;
-                    this.onHoverEnter(this.intersectedObject);
-                }
-                
-                // Already hovering over this object, update tooltip position
-                this.updateTooltipPosition(event, this.intersectedObject);
-            }
-        } else {
-            // No intersection, clear hover state
-            if (this.intersectedObject) {
-                this.onHoverExit(this.intersectedObject);
-                this.intersectedObject = null;
+this.composer.setSize(width, height);
+}
+
+onMouseMove(event) {
+    // Calculate mouse position in normalized device coordinates
+    const rect = this.renderer.domElement.getBoundingClientRect();
+    this.mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+    this.mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+    // Update raycaster
+    this.raycaster.setFromCamera(this.mouse, this.camera);
+
+    // Check intersection with central singularity
+    const centralIntersects = this.raycaster.intersectObject(this.centralSingularity, true);
+    if (centralIntersects.length > 0) {
+        if (!this.centralSingularity.userData._hovered) {
+            this.centralSingularity.userData._hovered = true;
+            if (typeof this.centralSingularity.onPointerOver === 'function') {
+                this.centralSingularity.onPointerOver();
             }
         }
-    }
-    
-    onClick(event) {
-        // Handle click - open detail panel if an event is clicked
-        if (this.intersectedObject && this.intersectedObject.userData.event) {
-            if (this.selectedObject !== this.intersectedObject) {
-                // Clear previous selection
-                if (this.selectedObject) {
-                    this.onSelectExit(this.selectedObject);
-                }
+    } else {
+        if (this.centralSingularity.userData._hovered) {
+            this.centralSingularity.userData._hovered = false;
+            if (typeof this.centralSingularity.onPointerOut === 'function') {
+                this.centralSingularity.onPointerOut();
                 
                 // Set new selection
                 this.selectedObject = this.intersectedObject;
@@ -349,86 +354,206 @@ class SingularitySystem {
             }
         }
     }
-    
-    onHoverEnter(object) {
-        // Highlight the object
-        this.scaleObject(object, 1.2);
-        
-        // Show tooltip
-        if (typeof this.onShowTooltip === 'function' && object.userData.event) {
-            this.onShowTooltip(object.userData.event);
+}
+
+onHoverEnter(object) {
+    // Highlight the object
+    this.scaleObject(object, 1.2);
+
+    // Show tooltip
+    if (typeof this.onShowTooltip === 'function' && object.userData.event) {
+        this.onShowTooltip(object.userData.event);
+    };
+}
+
+onHoverExit(object) {
+    // Remove highlight
+    this.scaleObject(object, 1.0);
+
+    // Hide tooltip
+    if (typeof this.onHideTooltip === 'function') {
+        this.onHideTooltip();
+    };
+}
+
+onSelectEnter(object) {
+    // Highlight the selected object more prominently
+    this.scaleObject(object, 1.5);
+}
+
+onSelectExit(object) {
+    // Remove selection highlight
+    this.scaleObject(object, 1.0);
+}
+
+scaleObject(object, scale) {
+    // Scale the object while preserving its original scale
+    if (object.userData.originalScale) {
+        object.scale.copy(object.userData.originalScale).multiplyScalar(scale);
+    } else {
+        // If originalScale is not set, store current scale as original
+        object.userData.originalScale = object.scale.clone();
+        object.scale.multiplyScalar(scale);
+    };
+}
+
+updateTooltipPosition(event, object) {
+    // Update tooltip position
+    if (typeof this.onUpdateTooltipPosition === 'function') {
+        const position = {
+            x: event.clientX,
+            y: event.clientY
+        };
+        this.onUpdateTooltipPosition(position);
+    };
+}
+
+loadEvents(events) {
+    try {
+        this.clearEvents();
+        this.events = events;
+
+        // Create 3D objects for each event
+        this.createEventObjects();
+
+        logger.info('Events loaded into singularity system', { count: events.length });
+    } catch (error) {
+        logger.handleError(error, 'loadEvents');
+    };
+}
+
+clearEvents() {
+    // Remove existing event objects from scene
+    this.eventObjects.forEach(object => {
+        this.scene.remove(object);
+    });
+
+    this.eventObjects = [];
+}
+
+createEventObjects() {
+    try {
+        // Calculate positioning scale based on number of events
+        const radius = Math.max(10, 5 + this.events.length * 0.8);
+        const spiralFactor = 0.2;
+
+        // Calculate user's current age in years (fractional)
+        const birthYear = 1983;
+        const birthMonth = 2;
+        const nowYear = 2025;
+        const nowMonth = 4;
+        const currentAge = (nowYear + (nowMonth - 1) / 12) - (birthYear + (birthMonth - 1) / 12);
+
+        // Compute event age at time of event (fractional years)
+        function getEventAge(event) {
+            // Prefer event.year and event.month if present
+            if (typeof event.year === 'number') {
+                const year = event.year;
+                const month = (typeof event.month === 'number') ? event.month : 1;
+                return (year + (month - 1) / 12) - (birthYear + (birthMonth - 1) / 12);
+            }
+            // fallback to event.age if available
+            if (typeof event.age === 'number') return event.age;
+            return 20; // default
         }
-    }
-    
-    onHoverExit(object) {
-        // Remove highlight
-        this.scaleObject(object, 1.0);
-        
-        // Hide tooltip
-        if (typeof this.onHideTooltip === 'function') {
-            this.onHideTooltip();
-        }
-    }
-    
-    onSelectEnter(object) {
-        // Highlight the selected object more prominently
-        this.scaleObject(object, 1.5);
-    }
-    
-    onSelectExit(object) {
-        // Remove selection highlight
-        this.scaleObject(object, 1.0);
-    }
-    
-    scaleObject(object, scale) {
-        // Scale the object while preserving its original scale
-        if (object.userData.originalScale) {
-            object.scale.copy(object.userData.originalScale).multiplyScalar(scale);
-        } else {
-            // If originalScale is not set, store current scale as original
-            object.userData.originalScale = object.scale.clone();
-            object.scale.multiplyScalar(scale);
-        }
-    }
-    
-    updateTooltipPosition(event, object) {
-        // Update tooltip position
-        if (typeof this.onUpdateTooltipPosition === 'function') {
-            const position = {
-                x: event.clientX,
-                y: event.clientY
-            };
-            this.onUpdateTooltipPosition(position);
-        }
-    }
-    
-    loadEvents(events) {
-        try {
-            this.clearEvents();
-            this.events = events;
-            
-            // Create 3D objects for each event
-            this.createEventObjects();
-            
-            logger.info('Events loaded into singularity system', { count: events.length });
-        } catch (error) {
-            logger.handleError(error, 'loadEvents');
-        }
-    }
-    
-    clearEvents() {
-        // Remove existing event objects from scene
-        this.eventObjects.forEach(object => {
-            this.scene.remove(object);
+
+        // Sort events by age (older = further from center)
+        const sortedEvents = [...this.events].sort((a, b) => {
+            const ageA = getEventAge(a);
+            const ageB = getEventAge(b);
+            return ageB - ageA;
         });
-        
-        this.eventObjects = [];
+
+        // Place events in spiral, distance based on age
+        const minDistance = 7;
+        const maxDistance = 30;
+        sortedEvents.forEach((event, index) => {
+            // Create shape based on event type
+            const eventShape = this.shapeFactory.createEventShape(event);
+
+            // Calculate age (fractional years)
+            const eventAge = getEventAge(event);
+            // Map age to distance: oldest event at maxDistance, newest at minDistance
+            const distance = minDistance + ((eventAge / currentAge) * (maxDistance - minDistance));
+            // Spiral angle
+            const angle = index * 0.5;
+            const height = (index % 2 === 0) ? index * 0.2 : -index * 0.2;
+
+            eventShape.position.x = Math.cos(angle) * distance;
+            eventShape.position.y = Math.sin(angle) * distance;
+            eventShape.position.z = height;
+
+            // Store original position for animation
+            eventShape.userData.originalPosition = eventShape.position.clone();
+
+            // Add orbit animation
+            eventShape.userData.orbit = {
+                angle: angle,
+                distance: distance,
+                height: height,
+                speed: 0.00005 + Math.random() * 0.00005
+            };
+
+            // Add to scene and tracking array
+            this.scene.add(eventShape);
+            this.eventObjects.push(eventShape);
+        });
+
+        logger.info('Event objects created', { count: this.eventObjects.length });
+    } catch (error) {
+        logger.handleError(error, 'createEventObjects');
+    };
+}
+
+animate() {
+    requestAnimationFrame(this.animate.bind(this));
+
+    const delta = this.clock.getDelta();
+    const elapsedTime = this.clock.getElapsedTime();
+
+    // Update controls
+    this.controls.update();
+
+    // Update central singularity animation
+    this.animateSingularity(delta, elapsedTime);
+
+    // Update event objects animation
+    this.animateEventObjects(delta, elapsedTime);
+
+    // Render scene with composer for post-processing effects
+    this.composer.render();
+}
+
+animateSingularity(delta, elapsedTime) {
+    // Rotate central singularity
+    if (this.centralSingularity.userData.rotation) {
+        const rotation = this.centralSingularity.userData.rotation;
+        this.centralSingularity.rotateOnAxis(rotation.axis, rotation.speed * delta * 1000);
     }
-    
-    createEventObjects() {
-        try {
-            // Calculate positioning scale based on number of events
-            const radius = Math.max(10, 5 + this.events.length * 0.8);
+
+    // Animate singularity rings
+    this.centralSingularity.children.forEach(child => {
+        if (child.userData.animation && child.userData.animation.rotationSpeed) {
+            child.rotation.z += child.userData.animation.rotationSpeed * delta * 1000;
+        }
+    });
+}
+
+animateEventObjects(delta, elapsedTime) {
+    this.eventObjects.forEach(object => {
+        // Update shape animations
+        this.shapeFactory.updateAnimation(object, delta);
+
+        // Update orbit position
+        if (object.userData.orbit) {
+            const orbit = object.userData.orbit;
+            orbit.angle += orbit.speed * delta * 1000;
+
+            const x = Math.cos(orbit.angle) * orbit.distance;
+            const y = Math.sin(orbit.angle) * orbit.distance;
+
+            object.position.x = x;
+            object.position.y = y;
             const spiralFactor = 0.2;
             
             // Sort events by age (to position older events further out)

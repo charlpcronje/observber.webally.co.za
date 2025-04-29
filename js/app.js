@@ -88,12 +88,89 @@ class App {
     }
 }
 
-// Initialize the application when DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
+// Pin code modal logic
+function showPinModal() {
+    // Create modal overlay
+    const overlay = document.createElement('div');
+    overlay.id = 'pin-modal-overlay';
+    overlay.style.cssText = `
+        position: fixed;
+        top: 0; left: 0; width: 100vw; height: 100vh;
+        background: rgba(0,0,0,0.7);
+        z-index: 99999;
+        display: flex; align-items: center; justify-content: center;`
+    ;
+    // Modal box
+    const modal = document.createElement('div');
+    modal.id = 'pin-modal-box';
+    modal.style.cssText = `
+        background: #181818;
+        color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 24px #000a;
+        padding: 32px 28px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-width: 280px;
+    `;
+    // Title
+    const title = document.createElement('h2');
+    title.textContent = 'Enter PIN to Access';
+    title.style.marginBottom = '16px';
+    modal.appendChild(title);
+    // Input
+    const input = document.createElement('input');
+    input.type = 'password';
+    input.placeholder = 'PIN';
+    input.maxLength = 8;
+    input.style.cssText = 'font-size: 20px; margin-bottom: 16px; padding: 8px; border-radius: 6px; border: 1px solid #555; text-align: center;';
+    modal.appendChild(input);
+    // Error
+    const errorMsg = document.createElement('div');
+    errorMsg.style.cssText = 'color: #ff4444; min-height: 22px; margin-bottom: 8px; font-size: 15px;';
+    modal.appendChild(errorMsg);
+    // Button
+    const btn = document.createElement('button');
+    btn.textContent = 'Unlock';
+    btn.style.cssText = 'padding: 8px 24px; font-size: 18px; border-radius: 6px; border: none; background: #05d9e8; color: #222; cursor: pointer; font-weight: bold;';
+    btn.onclick = tryUnlock;
+    modal.appendChild(btn);
+    // Enter key
+    input.addEventListener('keydown', e => {
+        if (e.key === 'Enter') tryUnlock();
+    });
+    // Focus input
+    setTimeout(() => input.focus(), 200);
+    // Try unlock logic
+    function tryUnlock() {
+        if (input.value === '4334') {
+            sessionStorage.setItem('pinUnlocked', 'yes');
+            document.body.removeChild(overlay);
+            startApp();
+        } else {
+            errorMsg.textContent = 'Incorrect PIN.';
+            input.value = '';
+            input.focus();
+        }
+    }
+    overlay.appendChild(modal);
+    document.body.appendChild(overlay);
+}
+
+function startApp() {
     try {
         window.app = new App();
     } catch (error) {
         console.error('Failed to start application:', error);
         alert('Failed to start application. Please check the console for details.');
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (sessionStorage.getItem('pinUnlocked') === 'yes') {
+        startApp();
+    } else {
+        showPinModal();
     }
 });

@@ -14,6 +14,35 @@
       }
     }
     </script>
+<style>
+#pin-modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.7);
+    z-index: 99999;
+    display: flex; align-items: center; justify-content: center;
+}
+#pin-modal-box {
+    background: #181818;
+    color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px #000a;
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 280px;
+}
+#pin-modal-box input[type="password"] {
+    font-size: 20px; margin-bottom: 16px; padding: 8px; border-radius: 6px; border: 1px solid #555; text-align: center;
+}
+#pin-modal-box button {
+    padding: 8px 24px; font-size: 18px; border-radius: 6px; border: none; background: #05d9e8; color: #222; cursor: pointer; font-weight: bold;
+}
+#pin-modal-box h2 {
+    margin-bottom: 16px;
+}
+</style>
 </head>
 <body>
     <div id="canvas-container"></div>

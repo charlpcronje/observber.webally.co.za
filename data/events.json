@@ -1,9 +1,24 @@
 [
     {
+        "id": "event_birth",
+        "title": "Birth During High-Risk Oxygen Deprivation Window",
+        "age": 0,
+        "year": 1982,
+        "month": 2,
+        "type": [
+            "Biochemical",
+            "Trauma",
+            "Survival"
+        ],
+        "probability": 0.0002,
+        "description": "Born during a critical oxygen deprivation window estimated at 5–6 minutes without full oxygenation. Despite extreme risk of death or lifelong brain damage, survived birth with full neurological integrity. Outcome defied normal survival and damage probability curves."
+    },
+    {
         "id": "event1",
         "title": "Fall from 4 Stories onto Cement",
         "age": 16,
-        "year": null,
+        "year": 1999,
+        "month": 12,
         "type": [
             "Trauma"
         ],
@@ -14,7 +29,8 @@
         "id": "event2",
         "title": "BMW X5 Crash at 160km/h",
         "age": 30,
-        "year": null,
+        "year": 2011,
+        "month": 12,
         "type": [
             "Trauma",
             "Impact"
@@ -26,7 +42,8 @@
         "id": "event3",
         "title": "Terminal Liver Failure Recovery",
         "age": 30,
-        "year": null,
+        "year": 2012,
+        "month": 12,
         "type": [
             "Biochemical"
         ],
@@ -37,19 +54,21 @@
         "id": "event4",
         "title": "Spider Bite Infection Averted",
         "age": 13,
-        "year": null,
+        "year": 1998,
         "type": [
             "Micro-causal",
             "Biochemical"
         ],
-        "probability": 0.00000001,
+        "probability": "0.00000001",
+        "probability_words": "one in one hundred million",
         "description": "Bitten by spider; infection forming. Randomly caught broken phone aerial that punctured the exact spot, ejecting infection. Friend with similar bite hospitalized with severe infection. Survival through improbable physical intervention."
     },
     {
         "id": "event5",
         "title": "Motorbike at 200km/h — Gate Opens",
         "age": 17,
-        "year": null,
+        "year": 2000,
+        "month": 12,
         "type": [
             "Impact",
             "Luck"
@@ -61,31 +80,37 @@
         "id": "event6",
         "title": "Footpeg Embedded in Knee",
         "age": "Teens",
-        "year": null,
+        "year": 1998,
+        "month": 12,
         "type": [
             "Trauma",
             "Biochemical"
         ],
-        "probability": 0.001,
+        "probability": 0.0000001,
+        "probability_words": "one in 10 million",
+
         "description": "Motorbike footpeg broke off and embedded into knee. Delayed treatment by one day. Manually extracted peg at hospital under minimal sedation. Avoided major infection or mobility loss."
     },
     {
         "id": "event7",
         "title": "Motorbike Scrambler Crashes (~100 times)",
         "age": "Teens",
-        "year": null,
+        "year": 1997,
+        "month": 12,
         "type": [
             "Trauma",
             "Impact"
         ],
-        "probability": 0.01,
+        "probability": 0.000000001,
+        "probability_words": "one in one hundred million",
         "description": "Approximately 100 crashes while racing motorbikes off-road without proper gear. Sustained minor injuries (broken fingers, toes) but always recovered fully. No long-term consequences."
     },
     {
         "id": "event8",
         "title": "Holding Breath 6+ Minutes Despite Smoking",
         "age": "40s",
-        "year": null,
+        "year": 2025,
+        "month": 12,
         "type": [
             "Biochemical"
         ],
@@ -94,9 +119,10 @@
     },
     {
         "id": "event9",
-        "title": "4th Story Fall on Back at Drive-in",
+        "title": "6th Story running jump of 18m",
         "age": "Teens",
-        "year": null,
+        "year": 2001,
+        "month": 12,
         "type": [
             "Trauma"
         ],
